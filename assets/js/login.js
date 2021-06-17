@@ -28,22 +28,6 @@ $(function () {
                 return "两次输入密码不一致！";
         }
     })
-    // // 监听注册表单提交行为
-    // $('#form_reg').on('submit', function (e) {
-    //     // 1.阻止默认行为
-    //     e.preventDefault();
-    //     // 2.发起ajax请求
-    //     $.post('http://api-breakingnews-web.itheima.net/api/reguser', { username: $('#form_reg[name=username]').val(), password: $('#form_reg[name=password]').val() }, function (res) {
-    //         if (res.status !== 200) {
-    //             // return console.log(res.message);
-    //             // return console.log('注册失败');
-    //             return layer.msg(res.message);
-    //         }
-    //         // console.log('注册成功！');
-    //         layer.msg('注册成功');
-    //         $('#link_login').click()
-    //     })
-    // })
     // 监听注册表单的提交事件
     $('#form_reg').on('submit', function (e) {
         // 1. 阻止默认的提交行为
@@ -53,7 +37,7 @@ $(function () {
             username: $('#form_reg [name=username]').val(),
             password: $('#form_reg [name=password]').val()
         }
-        $.post('http://api-breakingnews-web.itheima.net/api/reguser', data, function (res) {
+        $.post('/api/reguser', data, function (res) {
             if (res.status !== 0) {
                 return layer.msg(res.message)
             }
@@ -62,29 +46,29 @@ $(function () {
             $('#link_login').click()
         })
     })
-    // 监听登录表单提交信息
-    $('form_login').submit(function (e) {
+    // 监听登录表单的提交事件
+    $('#form_login').on('submit', function (e) {
         // 阻止默认提交行为
-        e.preventDefault();
+        e.preventDefault()
         $.ajax({
-            url: 'http://api-breakingnews-web.itheima.net/api/login',
-            method: 'post',
+            url: '/api/login',
+            method: 'POST',
             // 快速获取表单中的数据
             data: $(this).serialize(),
             success: function (res) {
                 if (res.status !== 0) {
-                    return layer.msg('登录失败！');
+                    console.log('登录成功');
+                    return layer.msg('登录失败！')
                 }
-                layer.msg('登陆成功！');
-                // 将登录成功得到的token字符串，保存到localStorage中
-                console.log('token');
+                layer.msg('登录成功！')
+                // 将登录成功得到的 token 字符串，保存到 localStorage 中
+                console.log(res.token);
                 localStorage.setItem('token', res.token)
-                // =====================================================bug======================
                 // 跳转到后台主页
-                location.href = '/index.html';
+                location.href = '/index.html'
             }
         })
-    })
 
+    })
 
 })
