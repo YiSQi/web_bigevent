@@ -14,7 +14,7 @@ $.ajaxPrefilter(function (options) {
     }
     // 全局统一挂在complete函数
     options.complete = function (res) {
-        console.log(res);
+        // console.log(res);
         if (res.responseJSON.status !== 0 && res.responseJSON.message !== '获取用户基本信息成功！') {
             // 清空token
             localStorage.removeItem('token')

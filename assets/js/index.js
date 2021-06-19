@@ -12,7 +12,7 @@ function getUserInfo() {
         //     Authorization: localStorage.getItem('token') || ''
         // },
         success: function (res) {
-            console.log(res);
+            // console.log(res);
             if (res.status !== 0) {
                 return layui.layer.msg('获取用户信息失败！')
             }
@@ -20,15 +20,15 @@ function getUserInfo() {
             renderAvatar(res.data)
         },
         // 请求成功还是失败都会调用complete函数
-        complete: function (res) {
-            console.log(res);
-            if (res.responseJSON.status !== 0 && res.responseJSON.message !== '获取用户基本信息成功！') {
-                // 清空token
-                localStorage.removeItem('token')
-                // 跳转到登录界面
-                location.href = '/login.html'
-            }
-        }
+        // complete: function (res) {
+        //     console.log(res);
+        //     if (res.responseJSON.status !== 0 && res.responseJSON.message !== '获取用户基本信息成功！') {
+        //         // 清空token
+        //         localStorage.removeItem('token')
+        //         // 跳转到登录界面
+        //         location.href = '/login.html'
+        //     }
+        // }
     })
 
 }
